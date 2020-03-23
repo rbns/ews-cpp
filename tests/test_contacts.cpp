@@ -848,4 +848,143 @@ TEST_F(ContactTest, GetCompleteNameProperty)
     EXPECT_STREQ("Minerva Mouse", complete_name.get_full_name().c_str());
     EXPECT_STREQ("Minnie", complete_name.get_nickname().c_str());
 }
+
+TEST(OfflineContactTest, InitialHasPicture)
+{
+    auto minnie = ews::contact();
+    EXPECT_EQ(false, minnie.get_has_picture());
+}
+
+TEST(OfflineContactTest, InitialPhoneticFullName)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_phonetic_full_name().c_str());
+}
+
+TEST(OfflineContactTest, SetPhoneticFullName)
+{
+    auto minnie = ews::contact();
+    minnie.set_phonetic_full_name("fəː˧˩˧");
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_full_name().c_str());
+}
+
+TEST_F(ContactTest, UpdatePhoneticFullName)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::phonetic_full_name, "fəː˧˩˧");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_full_name().c_str());
+}
+
+TEST(OfflineContactTest, InitialPhoneticFirstName)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_phonetic_full_name().c_str());
+}
+
+TEST(OfflineContactTest, SetPhoneticFirstName)
+{
+    auto minnie = ews::contact();
+    minnie.set_phonetic_first_name("fəː˧˩˧");
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_first_name().c_str());
+}
+
+TEST_F(ContactTest, UpdatePhoneticFirstName)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::phonetic_first_name, "fəː˧˩˧");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_first_name().c_str());
+}
+
+TEST(OfflineContactTest, InitialPhoneticLastName)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_phonetic_last_name().c_str());
+}
+
+TEST(OfflineContactTest, SetPhoneticLastName)
+{
+    auto minnie = ews::contact();
+    minnie.set_phonetic_last_name("fəː˧˩˧");
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_last_name().c_str());
+}
+
+TEST_F(ContactTest, UpdatePhoneticLastName)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::phonetic_last_name, "fəː˧˩˧");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("fəː˧˩˧", minnie.get_phonetic_last_name().c_str());
+}
+
+TEST(OfflineContactTest, InitialAlias)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_alias().c_str());
+}
+
+TEST(OfflineContactTest, SetAlias)
+{
+    auto minnie = ews::contact();
+    minnie.set_alias("alias@example.com");
+    EXPECT_STREQ("alias@example.com", minnie.get_alias().c_str());
+}
+
+TEST_F(ContactTest, UpdateAlias)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::alias, "alias@example.com");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("alias@example.com", minnie.get_alias().c_str());
+}
+
+TEST(OfflineContactTest, InitialNotes)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_notes().c_str());
+}
+
+TEST(OfflineContactTest, SetNotes)
+{
+    auto minnie = ews::contact();
+    minnie.set_notes("a happy little note");
+    EXPECT_STREQ("a happy little note", minnie.get_notes().c_str());
+}
+
+TEST_F(ContactTest, UpdateNotes)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::notes, "a happy little note");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("a happy little note", minnie.get_notes().c_str());
+}
+
+TEST(OfflineContactTest, InitialDirectoryId)
+{
+    auto minnie = ews::contact();
+    EXPECT_STREQ("", minnie.get_directory_id().c_str());
+}
+
+TEST(OfflineContactTest, SetDirectoryId)
+{
+    auto minnie = ews::contact();
+    minnie.set_directory_id("123456789");
+    EXPECT_STREQ("123456789", minnie.get_directory_id().c_str());
+}
+
+TEST_F(ContactTest, UpdateDirectoryId)
+{
+    auto minnie = test_contact();
+    auto prop = ews::property(ews::contact_property_path::directory_id, "123456789");
+    auto new_id = service().update_item(minnie.get_item_id(), prop);
+    minnie = service().get_contact(new_id, ews::base_shape::all_properties);
+    EXPECT_STREQ("123456789", minnie.get_directory_id().c_str());
+}
+
 } // namespace tests
