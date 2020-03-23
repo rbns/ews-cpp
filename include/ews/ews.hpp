@@ -16740,6 +16740,75 @@ public:
     // manager_mailbox
     // direct_reports
 
+    bool get_has_picture() const
+    {
+        const auto node = xml().get_value_as_string("HasPicture");
+        if (node == "true") {
+            return true;
+        }
+        return false;
+    }
+
+    std::string get_phonetic_full_name() const
+    {
+        return xml().get_value_as_string("PhoneticFullName");
+    }
+
+    void set_phonetic_full_name(const std::string& phonetic_full_name)
+    {
+        xml().set_or_update("PhoneticFullName", phonetic_full_name);
+    }
+
+    std::string get_phonetic_first_name() const
+    {
+        return xml().get_value_as_string("PhoneticFirstName");
+    }
+
+    void set_phonetic_first_name(const std::string& phonetic_first_name)
+    {
+        xml().set_or_update("PhoneticFirstName", phonetic_first_name);
+    }
+
+    std::string get_phonetic_last_name() const
+    {
+        return xml().get_value_as_string("PhoneticLastName");
+    }
+
+    void set_phonetic_last_name(const std::string& phonetic_last_name)
+    {
+        xml().set_or_update("PhoneticLastName", phonetic_last_name);
+    }
+
+    std::string get_alias() const
+    {
+        return xml().get_value_as_string("Alias");
+    }
+
+    void set_alias(const std::string& alias)
+    {
+        xml().set_or_update("Alias", alias);
+    }
+
+    std::string get_notes() const
+    {
+        return xml().get_value_as_string("Notes");
+    }
+
+    void set_notes(const std::string& notes)
+    {
+        xml().set_or_update("Notes", notes);
+    }
+
+    std::string get_directory_id() const
+    {
+        return xml().get_value_as_string("DirectoryId");
+    }
+
+    void set_directory_id(const std::string& directory_id)
+    {
+        xml().set_or_update("DirectoryId", directory_id);
+    }
+
     std::string get_user_smime_certificate() const
     {
 	const auto node = xml().get_node("UserSMIMECertificate");
